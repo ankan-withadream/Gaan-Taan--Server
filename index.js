@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const cors=require("cors");
 const mega = require('megajs');
+const File = mega.File;
 const request = require('request');
 const parser = require('body-parser');
 
@@ -34,7 +35,7 @@ const corsOptions ={
   
   // // create a Writeable stream for uploading the audio file to MEGA
   const megaFileStream = mega_storage.upload({ 
-    name: "new.mp3",
+    name: "sample.mp3",
     allowUploadBuffering: true,
 });
 
@@ -52,8 +53,10 @@ const corsOptions ={
   // });
 
   req.pipe(megaFileStream);
-  megaFileStream.on('complete', (file) => {
-    console.log('The file was uploaded!', file)
+  megaFileStream.on('complete', async (file) => {
+    console.log('The file was uploaded!', )
+    const fileUrl = await file.link();
+    console.log("File Url: ", fileUrl);
   })
   megaFileStream.on('error', (error) => {
     console.log('Error uploading file!', file)
@@ -108,16 +111,33 @@ app.get('/stream', async (req, res) => {
   // }
 
   // const fileId = req.params.fileId;
-  const fileId = "dvxmwB7A";
-  // const storage = new Megajs({email: 'your-email', password: 'your-password'});
-  const storage = new mega({email: "cocgreenranger@gmail.com", password: "Iamankan777",});
-  const file = new mega.File({key: fileId}, storage);
+  const fileId = "UvwAgTJQ";
+//   // const fileId = "dvoBEBKb";
+//   // const storage = new Megajs({email: 'your-email', password: 'your-password'});
+//   const storage = new mega({email: "cocgreenranger@gmail.com", password: "Iamankan777",});
+//   const file = new mega.File({key: fileId}, storage);
+// // console.log("File, Storage", file, storage);
+//   // wait for the file to load
+//   await file.loadAttributes();
 
-  // wait for the file to load
-  await file.loadAttributes();
+//   // get the download URL of the file
+//   const audioUrl = await file.link();
 
-  // get the download URL of the file
-  const audioUrl = await file.link();
+// let url = "https://mega.nz/file/VuBXTZSJ#GbV6TE4p3-Ja1ASPtgArOzH_dnWDX2mPeU-z-ga2rbo";
+let url = "https://mega.nz/file/InhmGZrD#fIc054DrV4Kx3HjtDtJ5xLNZh_pfAKJw97sODXnKipI";
+// const file = mega_storage.File.fromURL(url)
+  // const file = File({key: fileId, path: url}, mega_storage);
+  const file = File.fromURL(url)
+  console.log("File", file);
+await file.loadAttributes();
+console.log("GGGGGG",);
+
+console.log("File Loadatri", file.name);
+
+// const start = fs.statSync(file.name).size
+const downloadStream = file.download();
+
+
 
 
   // set the response headers for audio file
@@ -125,7 +145,9 @@ app.get('/stream', async (req, res) => {
   res.setHeader('Content-Disposition', 'inline');
 
   // use request module to stream the audio file directly to the response object
-  request.get(audioUrl).pipe(res);
+  // request.get(audioUrl).pipe(res);
+downloadStream.pipe(res)
+  
 });
 
 app.listen(3000, () => console.log('Server started on port 3000'));
