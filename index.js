@@ -22,6 +22,18 @@ const corsOptions ={
  app.use(parser.urlencoded({extended: true}));
 // app.use(express.urlencoded({extended: true}));
 
+const { createClient } = require("@astrajs/collections");
+const { clientConfig } = require("./db-config");
+console.log("db config:", clientConfig);
+// create an {astra_db} client
+const astraClient = createClient({
+    astraDatabaseId: clientConfig.ASTRA_DB_ID,
+    astraDatabaseRegion: clientConfig.ASTRA_DB_REGION,
+    applicationToken: clientConfig.ASTRA_DB_APPLICATION_TOKEN,
+}).then((client) => {
+  console.log("Client", client);
+});
+
 
  app.post('/upload-audio', async (req, res) => {
   console.log("Body received", req.files, req.body, req.data, req.body.audioFile, req.form);
@@ -124,7 +136,8 @@ app.get('/stream', async (req, res) => {
 //   const audioUrl = await file.link();
 
 // let url = "https://mega.nz/file/VuBXTZSJ#GbV6TE4p3-Ja1ASPtgArOzH_dnWDX2mPeU-z-ga2rbo";
-let url = "https://mega.nz/file/InhmGZrD#fIc054DrV4Kx3HjtDtJ5xLNZh_pfAKJw97sODXnKipI";
+// let url = "https://mega.nz/file/InhmGZrD#fIc054DrV4Kx3HjtDtJ5xLNZh_pfAKJw97sODXnKipI";
+let url = "https://mega.nz/file/5j5UAJ4I#D-zjsFVeGoTYxhpT93H3CjNZJzVYlRx4svvC0ARZUPs";
 // const file = mega_storage.File.fromURL(url)
   // const file = File({key: fileId, path: url}, mega_storage);
   const file = File.fromURL(url)
