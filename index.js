@@ -123,9 +123,7 @@ app.get('/stream', async (req, res) => {
 //   // get the download URL of the file
 //   const audioUrl = await file.link();
 
-// let url = "https://mega.nz/file/VuBXTZSJ#GbV6TE4p3-Ja1ASPtgArOzH_dnWDX2mPeU-z-ga2rbo";
-// let url = "https://mega.nz/file/InhmGZrD#fIc054DrV4Kx3HjtDtJ5xLNZh_pfAKJw97sODXnKipI";
-let url = "https://mega.nz/file/5j5UAJ4I#D-zjsFVeGoTYxhpT93H3CjNZJzVYlRx4svvC0ARZUPs";
+let url = "https://mega.nz/file/c3pnFJLS#otCIH5YLhnNwSB0sp1YYKr9zNMc4MAE7G0Wj_EzR4mQ";
 // const file = mega_storage.File.fromURL(url)
   // const file = File({key: fileId, path: url}, mega_storage);
   const file = File.fromURL(url)
@@ -134,7 +132,6 @@ await file.loadAttributes();
 console.log("GGGGGG",);
 
 console.log("File Loadatri", file.name);
-
 // const start = fs.statSync(file.name).size
 const downloadStream = file.download();
 
@@ -151,4 +148,4 @@ downloadStream.pipe(res)
   
 });
 
-app.listen(3000, () => console.log('Server started on port 3000'));
+app.listen(3000, () => console.log('Server started on port 3000'))
