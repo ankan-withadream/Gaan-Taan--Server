@@ -22,18 +22,6 @@ const corsOptions ={
  app.use(parser.urlencoded({extended: true}));
 // app.use(express.urlencoded({extended: true}));
 
-const { createClient } = require("@astrajs/collections");
-const { clientConfig } = require("./db-config");
-console.log("db config:", clientConfig);
-// create an {astra_db} client
-const astraClient = createClient({
-    astraDatabaseId: clientConfig.ASTRA_DB_ID,
-    astraDatabaseRegion: clientConfig.ASTRA_DB_REGION,
-    applicationToken: clientConfig.ASTRA_DB_APPLICATION_TOKEN,
-}).then((client) => {
-  console.log("Client", client);
-});
-
 
  app.post('/upload-audio', async (req, res) => {
   console.log("Body received", req.files, req.body, req.data, req.body.audioFile, req.form);
