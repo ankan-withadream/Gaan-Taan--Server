@@ -10,6 +10,7 @@ const parser = require('body-parser');
 
 const app = express();
 const mega_storage = new mega.Storage({email: "cocgreenranger@gmail.com", password: "Iamankan777",});
+const mongoose = require('mongoose');
 
 const corsOptions ={
     origin:'*', 
@@ -20,8 +21,15 @@ const corsOptions ={
  app.use(cors(corsOptions));
  app.use(parser.json());
  app.use(parser.urlencoded({extended: true}));
+ 
 // app.use(express.urlencoded({extended: true}));
-
+mongoose.connect("mongodb+srv://cocgreenranger:admin@cluster0.yoel9wg.mongodb.net/?retryWrites=true&w=majority")
+.then((status) => {
+  console.log("successfully connected database:");
+})
+.catch((error) => {
+  console.log("Error while database connection:", error);
+})
 
  app.post('/upload-audio', async (req, res) => {
   console.log("Body received", req.files, req.body, req.data, req.body.audioFile, req.form);
@@ -57,6 +65,9 @@ const corsOptions ={
     console.log('The file was uploaded!', )
     const fileUrl = await file.link();
     console.log("File Url: ", fileUrl);
+
+
+
   })
   megaFileStream.on('error', (error) => {
     console.log('Error uploading file!', file)
