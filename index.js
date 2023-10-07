@@ -1,16 +1,17 @@
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const cors=require("cors");
-const mega = require('megajs');
+import express from 'express';
+import fs from 'fs';
+import path from 'path';
+import cors from "cors";
+// const mega = require('megajs');
+import * as mega from "megajs";
 const File = mega.File;
-const request = require('request');
-const parser = require('body-parser');
+import request from "request";
+import parser from "body-parser";
+import mongoose from "mongoose";
 
 
 const app = express();
 const mega_storage = new mega.Storage({email: "cocgreenranger@gmail.com", password: "Iamankan777",});
-const mongoose = require('mongoose');
 
 const corsOptions ={
     origin:'*', 
@@ -31,6 +32,20 @@ mongoose.connect("mongodb+srv://cocgreenranger:admin@cluster0.yoel9wg.mongodb.ne
   console.log("Error while database connection:", error);
 })
 
+app.get('/', async (req, res) => {
+  console.log("routed /");
+  // res.send("You are routing to root /").status(200);
+  // need to map to a controller async func that will return something, after getting the value send response from here.
+  let response = await sendResponse();
+  res.send(response);
+  // sendResponse();
+})
+
+async function sendResponse() {
+  let ppp = 5+5*99999999*99999999*99999999999999999
+  await console.log(ppp)
+  return ppp.toString();
+}
  app.post('/upload-audio', async (req, res) => {
   console.log("Body received", req.files, req.body, req.data, req.body.audioFile, req.form);
   // console.log("Mega Storage", mega_storage);
