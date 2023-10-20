@@ -10,7 +10,7 @@ const MEGA_CREDENTIALS = {
     password: "Iamankan777",
 }
 
-const MONGOOSE_CONNECTION_STRING = "mongodb+srv://cocgreenranger:admin@cluster0.yoel9wg.mongodb.net/?retryWrites=true&w=majority";
+const MONGOOSE_CONNECTION_STRING = "mongodb+srv://cocgreenranger:admin@cluster0.yoel9wg.mongodb.net/GaanTaan?retryWrites=true&w=majority";
 
 
 export {corsOptions, MEGA_CREDENTIALS, MONGOOSE_CONNECTION_STRING}

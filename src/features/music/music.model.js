@@ -8,6 +8,6 @@ const MusicSchema = new mongoose.Schema(   {
     music_image: String
 });
 
-const Music = mongoose.model("Music", MusicSchema);
+const Music = mongoose.model("Music", MusicSchema, "Music");
 
 export { Music };
