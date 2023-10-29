@@ -1,0 +1,5 @@
+Done:
+    Upoad music controller func is working fine for DB insert new music and Mega upload new music.
+
+To be done:
+    In upload music controller func need to sync up the Mega music uploading and returned URL with DB insertion with req.body parameters.

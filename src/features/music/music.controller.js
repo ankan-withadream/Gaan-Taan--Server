@@ -1,6 +1,7 @@
 import { File } from "megajs";
 import mongoose from "mongoose";
 import { Music } from "./music.model.js";
+import { mega_storage } from "../../services/server.js";
 
 
 const streamMusic = (async (req, res) => {
