@@ -8,4 +8,4 @@ Done:
     Write the functions in the playlist controller.
 
 To be done: 
-    Create routes and controllers for add_music_to_playlist, rem_music_from_playlist.
+    Create routes and controllers for add_music_to_playlist, rem_music_from_playlist, deletePlaylist.

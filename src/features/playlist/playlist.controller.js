@@ -2,8 +2,19 @@ import * as mongoose from "mongoose";
 import { Playlist } from "./playlist.model.js";
 
 const getPlaylist = (async (req, res) => {
+    try {
     let playlist = await Playlist.findOne({ playlist_id: req.params.playlist_id });
-    res.send(playlist);
+    if (playlist) {
+        res.send(playlist);
+    }
+    else {
+        res.send({
+            message: "playlist not found"
+        })
+    }
+    } catch (error) {
+        res.send(error).status(500)
+    }
 })
 
 
@@ -27,4 +38,20 @@ const createPlaylist = (async (req, res) => {
 });
 
 
-export { getPlaylist, createPlaylist };
+const deletePlaylist = (async (req, res) => {
+
+})
+
+
+const addMusicToPlaylist = (async (req, res) => {
+    
+});
+
+
+const remMusicFromPlaylist = (async (req, res) => {
+     
+});
+
+
+
+export { getPlaylist, createPlaylist, deletePlaylist, addMusicToPlaylist, remMusicFromPlaylist };
