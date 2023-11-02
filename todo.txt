@@ -5,7 +5,7 @@ Done:
 
     Play list basic structured files created. Playlist model declared. Routers connected.
 
-To be done: 
     Write the functions in the playlist controller.
 
+To be done: 
     Create routes and controllers for add_music_to_playlist, rem_music_from_playlist.

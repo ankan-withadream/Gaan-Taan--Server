@@ -7,7 +7,6 @@ import { mega_storage } from "../../services/server.js";
 const streamMusic = (async (req, res) => {
 
   let music = await Music.findOne({ music_id: req.params.musicId });
-  // let url = "https://mega.nz/file/c3pnFJLS#otCIH5YLhnNwSB0sp1YYKr9zNMc4MAE7G0Wj_EzR4mQ";
   let url = music["music_url"];
   const file = File.fromURL(url);
   await file.loadAttributes();

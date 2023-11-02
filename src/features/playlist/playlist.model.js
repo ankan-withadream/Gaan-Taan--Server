@@ -1,7 +1,7 @@
 import * as mongoose from "mongoose";
 
 const PlaylistSchema = new mongoose.Schema({
-    playlist_id: String,
+    playlist_id: Number,
     playlist_users: Array,
     playlist_musics: Array,
     created_by: Number,
@@ -11,4 +11,6 @@ const PlaylistSchema = new mongoose.Schema({
     playlist_admins: Array,
 });
 
-export { PlaylistSchema };
+const Playlist = mongoose.model("Playlist", PlaylistSchema, "Playlist")
+
+export { Playlist };
