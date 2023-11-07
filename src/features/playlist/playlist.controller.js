@@ -3,15 +3,15 @@ import { Playlist } from "./playlist.model.js";
 
 const getPlaylist = (async (req, res) => {
     try {
-    let playlist = await Playlist.findOne({ playlist_id: req.params.playlist_id });
-    if (playlist) {
-        res.send(playlist);
-    }
-    else {
-        res.send({
-            message: "playlist not found"
-        })
-    }
+        let playlist = await Playlist.findOne({ playlist_id: req.params.playlist_id });
+        if (playlist) {
+            res.send(playlist);
+        }
+        else {
+            res.send({
+                message: "playlist not found"
+            })
+        }
     } catch (error) {
         res.send(error).status(500)
     }
@@ -39,17 +39,51 @@ const createPlaylist = (async (req, res) => {
 
 
 const deletePlaylist = (async (req, res) => {
+    let playlist_id = parseInt(req.params.playlist_id);
+    console.log("Body received", req.files, req.body, req.data, req.body.audioFile, req.form);
+    try {
+        let deletedPlaylist = await Playlist.updateOne({ playlist_id: playlist_id }, { $addToSet: { playlist_musics: music_id } })
+        console.log(deletedPlaylist);
+        return res.status(200).json(deletedPlaylist);
+    } catch (error) {
 
+        console.log(error);
+        res.status(500).json(JSON.stringify(error));
+    }
 })
 
 
 const addMusicToPlaylist = (async (req, res) => {
-    
+    let playlist_id = parseInt(req.params.playlist_id);
+    let music_id = parseInt(req.params.music_id);
+    console.log("Body received", req.files, req.body, req.data, req.body.audioFile, req.form, typeof pid, typeof req.params.playlist_id, req.params.music_id);
+
+    try {
+        let updatedPlaylist = await Playlist.updateOne({ playlist_id: playlist_id }, { $addToSet: { playlist_musics: music_id } })
+        console.log(updatedPlaylist);
+        return res.status(200).json(updatedPlaylist);
+    } catch (error) {
+
+        console.log(error);
+        res.status(500).json(JSON.stringify(error));
+    }
 });
 
 
 const remMusicFromPlaylist = (async (req, res) => {
-     
+    let playlist_id = parseInt(req.params.playlist_id);
+    let music_id = parseInt(req.params.music_id);
+    console.log("Body received", req.files, req.body, req.data, req.body.audioFile, req.form, typeof pid, typeof req.params.playlist_id, req.params.music_id);
+
+    try {
+        let updatedPlaylist = await Playlist.updateOne({ playlist_id: playlist_id }, { $pull: { playlist_musics: music_id } })
+        console.log(updatedPlaylist);
+        return res.status(200).json(updatedPlaylist);
+    } catch (error) {
+
+        console.log(error);
+        res.status(500).json(JSON.stringify(error));
+    }
 });
 
 

@@ -7,5 +7,10 @@ Done:
 
     Write the functions in the playlist controller.
 
-To be done: 
     Create routes and controllers for add_music_to_playlist, rem_music_from_playlist, deletePlaylist.
+    
+To be done:
+    Create User Model, routes and controllers functions (blank).
+        Create User
+        Authenticate User
+        User details
