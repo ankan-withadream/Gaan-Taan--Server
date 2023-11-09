@@ -1,0 +1,20 @@
+Done:
+    Upoad music controller func is working fine for DB insert new music and Mega upload new music.
+
+    In upload music controller func need to sync up the Mega music uploading and returned URL with DB insertion with req.body parameters.
+
+    Play list basic structured files created. Playlist model declared. Routers connected.
+
+    Write the functions in the playlist controller.
+
+    Create routes and controllers for add_music_to_playlist, rem_music_from_playlist, deletePlaylist.
+    
+    Create User Model, routes and controllers functions (blank).
+
+    
+To be done:
+
+    Create api for user controller functions
+        Create User
+        Authenticate User
+        User details
