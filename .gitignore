@@ -3,3 +3,7 @@
 /.env
 /db-config.js
 /shared-tabs.txt
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
